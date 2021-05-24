@@ -13,7 +13,7 @@ pigpio_factory = PiGPIOFactory()
 servo = AngularServo(22, min_angle=-90, max_angle=90, pin_factory=pigpio_factory)
 servo.angle = 0
 print("servo mid")
-sleep(3)
+sleep(5)
 
 
 while True:

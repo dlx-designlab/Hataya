@@ -37,17 +37,17 @@ def get_encoder_step():
     if IS_AV_MODE:
       srv_pos = SERVO.angle
       offset = (srv_pos * ENC_SRV_RATIO) - enc_pos
-      print(offset)
+      print(f"{offset:.2f}")
       if abs(offset) > TAKEOVER_OFFSET:
         IS_AV_MODE = False
     else:
-      print(enc_pos)
+      print(f"{enc_pos:.2f}")
 
 def servo_ctrl():
   global SERVO, IS_AV_MODE, ENCODER, ENC_SRV_RATIO
   # servo_done = threading.Event()
   delay = 0.1     #seconds
-  servo_step = 2  #angle
+  servo_step = 10  #angle
 
   SERVO.max()
   print("Moving to Max position")
@@ -70,10 +70,10 @@ def servo_ctrl():
   while IS_AV_MODE == True:
     
     if SERVO.angle < (SERVO.min_angle - servo_step):
-      servo_step = 2
+      servo_step = 10
       sleep(2)      
     elif SERVO.angle > (SERVO.max_angle - servo_step):
-      servo_step = -2
+      servo_step = -10
       sleep(2)
     
     SERVO.angle += servo_step

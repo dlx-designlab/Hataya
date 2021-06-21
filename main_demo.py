@@ -5,6 +5,10 @@ from gpiozero import AngularServo, Button, RotaryEncoder
 from signal import pause
 from time import sleep
 import threading
+from pythonosc import udp_client
+
+client = udp_client.SimpleUDPClient("192.168.205.40", "12000")
+
 
 IS_AV_MODE = False
 
@@ -44,6 +48,8 @@ def get_encoder_step():
     global ENCODER #, SERVO, IS_AV_MODE, ENC_SRV_RATIO
     enc_pos = ENCODER.steps
     print(enc_pos)
+    # client.send_message("/steer", enc_pos)
+
 
 
 def av_steering_init():
